@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces Daily Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            background-color: #f5f5f0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 60px 50px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 10px;
+            font-weight: normal;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        td {
+            padding: 16px 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: 2px solid black;
+        }
+
+        .problem-name {
+            font-weight: 500;
+            color: #000;
+        }
+
+        .rating {
+            text-align: center;
+            min-width: 60px;
+            color: #555;
+        }
+
+        .checkbox-cell {
+            text-align: center;
+            width: 50px;
+        }
+
+        .checkbox-cell input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: black;
+        }
+
+        .link-cell {
+            text-align: center;
+        }
+
+        .link-cell a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .link-cell a:hover {
+            text-decoration: underline;
+        }
+
+        tr.completed .problem-name {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        tr.completed {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #fafaf8;
+            border: 1px solid #e0e0d8;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Practice Set</h1>
+        <p class="subtitle">Codeforces Problem Selection</p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="total-count">12</div>
+                <div class="stat-label">Total Problems</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="completed-count">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="remaining-count">12</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40px;"></th>
+                    <th>Problem</th>
+                    <th style="width: 70px;">Rating</th>
+                    <th style="width: 60px;">Link</th>
+                </tr>
+            </thead>
+            <tbody id="problems-tbody">
+                <tr class="problem-row" data-problem-id="1679_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Stone Age Problem</td>
+                    <td class="rating">1200</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1679/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="2124_C">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Subset Multiplication</td>
+                    <td class="rating">1300</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/2124/problem/C" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1380_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Universal Solution</td>
+                    <td class="rating">1400</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1380/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1363_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Subsequence Hate</td>
+                    <td class="rating">1400</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1363/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1799_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Equalize by Divide</td>
+                    <td class="rating">1200</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1799/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1520_E">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Arranging The Sheep</td>
+                    <td class="rating">1400</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1520/problem/E" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1592_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Hemose Shopping</td>
+                    <td class="rating">1200</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1592/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="611_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">New Year and Old Property</td>
+                    <td class="rating">1300</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/611/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="2066_A">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Object Identification</td>
+                    <td class="rating">1400</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/2066/problem/A" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="2170_B">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Addition on a Segment</td>
+                    <td class="rating">1200</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/2170/problem/B" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1984_C1">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Magnitude (Easy Version)</td>
+                    <td class="rating">1300</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1984/problem/C1" target="_blank">Open</a>
+                    </td>
+                </tr>
+                <tr class="problem-row" data-problem-id="1948_C">
+                    <td class="checkbox-cell">
+                        <input type="checkbox" class="problem-checkbox" >
+                    </td>
+                    <td class="problem-name">Arrow Path</td>
+                    <td class="rating">1300</td>
+                    <td class="link-cell">
+                        <a href="https://codeforces.com/contest/1948/problem/C" target="_blank">Open</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Check the box to mark problems as completed. Changes are saved automatically.</p>
+        </div>
+    </div>
+
+    <script>
+        // Track completed problems
+        const doneSet = new Set();
+
+        // Load done list from server
+        async function loadDone() {
+            try {
+                const res = await fetch('/done-list');
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(id => doneSet.add(id));
+                    updateUI();
+                }
+            } catch (err) {
+                console.log('Note: Could not load done list from server');
+            }
+        }
+
+        // Mark problem as done
+        async function markDone(problemId, isDone) {
+            try {
+                const method = isDone ? 'POST' : 'DELETE';
+                const res = await fetch('/done', {
+                    method: method,
+                    body: problemId
+                });
+                
+                if (res.ok) {
+                    if (isDone) {
+                        doneSet.add(problemId);
+                    } else {
+                        doneSet.delete(problemId);
+                    }
+                    updateUI();
+                }
+            } catch (err) {
+                console.error('Error marking problem:', err);
+            }
+        }
+
+        // Update UI based on done state
+        function updateUI() {
+            const rows = document.querySelectorAll('.problem-row');
+            let completed = 0;
+
+            rows.forEach(row => {
+                const problemId = row.dataset.problemId;
+                const checkbox = row.querySelector('.problem-checkbox');
+                const isDone = doneSet.has(problemId);
+
+                checkbox.checked = isDone;
+                if (isDone) {
+                    row.classList.add('completed');
+                    completed++;
+                } else {
+                    row.classList.remove('completed');
+                }
+            });
+
+            const total = rows.length;
+            document.getElementById('completed-count').textContent = completed;
+            document.getElementById('remaining-count').textContent = total - completed;
+            document.getElementById('total-count').textContent = total;
+        }
+
+        // Attach checkbox listeners
+        document.querySelectorAll('.problem-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const problemId = e.target.closest('.problem-row').dataset.problemId;
+                markDone(problemId, e.target.checked);
+            });
+        });
+
+        // Load done list on page load
+        window.addEventListener('DOMContentLoaded', loadDone);
+    </script>
+</body>
+</html>
