@@ -56,6 +56,24 @@ Interactive prompts:
 
 Press **Ctrl+C** to stop the server. Your progress is saved.
 
+### 4. Sync with your Codeforces account (optional)
+
+```bash
+python report.py
+```
+
+Enter your Codeforces username when prompted. This will:
+
+1. **Fetch your solved problems** from Codeforces API
+2. **Update `done.txt`** — appends any newly solved problems
+3. **Generate `report.html`** — detailed statistics including:
+   - Current rating, max rating, rank
+   - Problems by difficulty distribution
+   - Top tags you've practiced
+   - Solve timeline by month
+
+Great for tracking your progress and syncing your account!
+
 ## Usage Example
 
 ```bash
@@ -66,6 +84,9 @@ python scrape.py          # ~2–5 min, creates problems.json
 python generate.py        # Interactive prompts → opens browser
 # ... solve problems, check boxes as you go
 # ... Ctrl+C when done
+
+# Sync your account (optional, any time)
+python report.py          # Fetches your solved problems, generates stats
 ```
 
 ## File Structure
@@ -74,9 +95,11 @@ python generate.py        # Interactive prompts → opens browser
 cf-daily/
 ├── scrape.py           # Fetch problems from CF API (run once)
 ├── generate.py         # Daily generator + local HTTP server
+├── report.py           # User stats & sync (optional)
 ├── problems.json       # Cached problems (~11k), auto-generated
 ├── done.txt            # Problem IDs you've completed, line-separated
 ├── index.html          # Auto-generated UI, served locally
+├── report.html         # Auto-generated stats report
 ├── requirements.txt    # Python dependencies
 └── README.md           # This file
 ```
@@ -112,6 +135,24 @@ cf-daily/
 - Checkboxes trigger `POST /done` (mark done) or `DELETE /done` (mark undone)
 - Real-time UI updates: strikethrough, greyed background, stats refresh
 - Pure client-side state, persisted via server
+
+### report.py
+
+1. Prompts for Codeforces username
+2. Fetches user's accepted submissions via `user.status` API
+3. Extracts unique solved problems (by contest + problem index)
+4. Enriches data with local `problems.json` for ratings/tags
+5. **Updates `done.txt`** — appends any newly solved problems not yet in file
+6. **Generates `report.html`** with visualizations:
+   - Current rating, max rating, rank, total solved count
+   - Bar chart: problems by difficulty distribution
+   - Top 10 tags with frequency
+   - Timeline: solve history by month
+
+**Great for:**
+- Syncing your Codeforces account progress to `done.txt`
+- Viewing personal statistics and trends
+- One-command progress snapshot
 
 ## Dependencies
 
