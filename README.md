@@ -9,7 +9,9 @@ A minimalist CLI tool to generate personalized daily Codeforces problem sets wit
 - **Smart filtering** — difficulty range, tag selection, and spread across rating bands
 - **Web UI** — clean, exam-paper style interface with checkbox tracking
 - **Local server** — no backend needed, marks persist to `done.txt`
-- **Fully offline** — after scraping, everything runs without internet
+- **Account sync** — fetch your Codeforces solved problems and auto-update `done.txt`
+- **Personal stats** — view beautiful reports with ratings, tags, and progress timelines
+- **Fully offline** — after scraping, everything runs without internet (except account sync)
 
 ## Setup
 
@@ -138,21 +140,26 @@ cf-daily/
 
 ### report.py
 
-1. Prompts for Codeforces username
-2. Fetches user's accepted submissions via `user.status` API
-3. Extracts unique solved problems (by contest + problem index)
-4. Enriches data with local `problems.json` for ratings/tags
-5. **Updates `done.txt`** — appends any newly solved problems not yet in file
-6. **Generates `report.html`** with visualizations:
-   - Current rating, max rating, rank, total solved count
-   - Bar chart: problems by difficulty distribution
-   - Top 10 tags with frequency
-   - Timeline: solve history by month
+**Purpose:** Sync your Codeforces account progress and generate personal statistics.
 
-**Great for:**
-- Syncing your Codeforces account progress to `done.txt`
-- Viewing personal statistics and trends
-- One-command progress snapshot
+**Workflow:**
+1. Prompts for your Codeforces username (public profile, no auth needed)
+2. Fetches all your accepted submissions via `user.status` API
+3. Extracts unique solved problems (by contest ID + problem index)
+4. Enriches data with local `problems.json` for ratings/tags
+5. **Updates `done.txt`** — intelligently appends only newly solved problems (no duplicates)
+6. **Generates `report.html`** with beautiful visualizations:
+   - **Profile card:** Current rating, max rating, rank, total solved count
+   - **Difficulty distribution:** Bar chart showing problems solved by rating range
+   - **Top 10 tags:** Tag frequency chart (most practiced topics)
+   - **Solve timeline:** Month-by-month progression graph
+
+**Key benefits:**
+- Sync all your solved problems in one command (works even if you solved them on Codeforces directly)
+- Intelligently avoids duplicates — only adds problems not already in `done.txt`
+- Beautiful, responsive HTML report with statistics
+- No authentication needed — uses public Codeforces API
+- Perfect for tracking long-term progress and identifying weak areas
 
 ## Dependencies
 
@@ -206,12 +213,71 @@ The `cloudscraper` library handles most cases. If it fails:
 - Try running scraper during off-peak hours
 - Update cloudscraper: `pip install --upgrade cloudscraper`
 
+### report.py: "User not found" error
+- Check that your Codeforces username is spelled correctly
+- Usernames are case-sensitive (e.g., `tourist` vs `Tourist`)
+- Verify your profile is public: https://codeforces.com/profile/YOUR_USERNAME
+
+### report.py: No new problems added to done.txt
+This is normal! It means:
+- All your solved problems are already in `done.txt`, OR
+- You haven't solved any new problems since last sync
+
+The script always shows how many were already tracked vs newly added.
+
+### report.html doesn't open automatically
+- The file is still generated! Open it manually: `open report.html` (Mac) or `start report.html` (Windows)
+- Or drag `report.html` into your browser
+
 ## Tips
 
 - **First run:** Use a wide difficulty range (e.g., 1000–2000) to explore
 - **Mix difficulties:** Default band spreading ensures low/mid/high variety
 - **Tag strategy:** Start broad (all tags), then specialize once comfortable
 - **Daily habit:** Run `generate.py` each morning, target 10–15 problems
+- **Sync often:** Run `report.py` weekly to sync your progress and view trends
+- **Track growth:** Compare `report.html` snapshots over time to see improvement
+
+## Advanced Usage
+
+### Workflow: Problem Set + Account Sync
+
+```bash
+# Once a week: sync your account and review stats
+python report.py
+# View report.html to see your progress
+
+# Then: generate fresh practice set
+python generate.py
+# Adjust difficulty based on your current rating
+```
+
+### Chaining Commands
+
+```bash
+# Scrape, then immediately generate a set
+python scrape.py && python generate.py
+
+# Sync account, then generate custom set
+python report.py && python generate.py
+```
+
+### Manual done.txt Management
+
+If you want to manually track problems, edit `done.txt` directly:
+```
+2220_A
+2219_D
+2218_E
+```
+
+Each line is one problem ID (`contest_index` format).
+
+### Combining Multiple Sources
+
+- Solve problems from `generate.py` — mark done with checkboxes
+- Solve problems on Codeforces directly — run `report.py` to sync
+- All synced automatically to `done.txt`!
 
 ## License
 
